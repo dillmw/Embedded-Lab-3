@@ -15,10 +15,3 @@ int main(void)
             P6OUT^=BIT6;
     }
 
-//Calculated Duty Cycle: 10%
-//Calculated Period: 500ms
-//Calculated Frequency: 2 Hz
-
-//Measured Duty Cycle: 90.002%
-//Measured Period: 499.81ms
-//Measured Frequency: 2.0007 Hz
