@@ -1,0 +1,25 @@
+#include <msp430.h>
+int main(void)
+{
+    WDTCTL = WDTPW | WDTHOLD;                 // Stop WDT
+    P1DIR |= BIT6 | BIT7;                     // P1.6 and P1.7 output
+    P1SEL1 |= BIT6 | BIT7;                    // P1.6 and P1.7 options select
+    PM5CTL0 &= ~LOCKLPM5;
+    TB0CCR0 = (32768*0.25);                         // PWM Period
+    TB0CCTL1 = OUTMOD_7;                      // CCR1 reset/set
+    TB0CCR1 = 1638;                            // CCR1 PWM duty cycle
+
+    TB0CTL = TBSSEL__ACLK | MC__UP | TBCLR;  // ACLK, up mode, clear TBR
+    while(1)
+    {
+        P1OUT ^=BIT6;// For debugger
+    }
+}
+
+//Calculated Duty Cycle: 20%
+//Calculated Period: 250ms
+//Calculated Frequency: 4 Hz
+
+//Measured Duty Cycle: 80.005%
+//Measured Period: 249.92ms
+//Measured Frequency: 4.0012 Hz
